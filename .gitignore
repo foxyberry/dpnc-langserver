@@ -1,0 +1,8 @@
+.DS_Store
+.env
+.envrc
+.ipynb_checkpoints/
+.jupyter/
+.prompt/
+__pycache__/
+langchain-env/
