@@ -23,8 +23,10 @@ app = FastAPI(
     description="A simple api server using Langchain's Runnable interfaces",
 )
 
+
+gpt = ChatOpenAI(temperature=0, model="gpt-4o-mini")
 #gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125")
-gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
+#gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
 
 
 pyeong_prompt_file = "../.prompt/pyeong_price_prompt.txt"
