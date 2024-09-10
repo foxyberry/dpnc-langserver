@@ -23,30 +23,25 @@ app = FastAPI(
     description="A simple api server using Langchain's Runnable interfaces",
 )
 
-gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125")
+#gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125")
+gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
 
 
-prompt_file = "../.prompt/prompt.txt"
+pyeong_prompt_file = "../.prompt/pyeong_price_prompt.txt"
+land_prompt_file = "../.prompt/land_price_prompt.txt"
 
-prompt_template = read_file(prompt_file)
-prompt = ChatPromptTemplate.from_template(prompt_template)
-gpt_chain = prompt | gpt
 
 add_routes(
     app,
-    gpt_chain,
-    path="/analyze"
+    ChatPromptTemplate.from_template(read_file(pyeong_prompt_file)) | gpt,
+    path="/pyeong-analyze"
 )
 
-async def generate_stream(input_data: dict):
-    for chunk in gpt_chain.stream({"input_data": input_data}):
-        yield chunk.content
-
-
-@app.post("/analyze/")
-async def analyze_json(request: Request):
-    input_data = await request.json()
-    return StreamingResponse(generate_stream(input_data), media_type="text/plain")
+add_routes(
+    app,
+    ChatPromptTemplate.from_template(read_file(land_prompt_file)) | gpt,
+    path="/landprice-analyze"
+)
 
 
 if __name__ == "__main__":
