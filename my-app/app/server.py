@@ -26,10 +26,8 @@ app = FastAPI(
 gpt = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125")
 
 
-history_file = "../.prompt/history.txt"
 prompt_file = "../.prompt/prompt.txt"
 
-history = [read_file(history_file)]
 prompt_template = read_file(prompt_file)
 prompt = ChatPromptTemplate.from_template(prompt_template)
 gpt_chain = prompt | gpt
@@ -41,7 +39,7 @@ add_routes(
 )
 
 async def generate_stream(input_data: dict):
-    for chunk in gpt_chain.stream({"input": input_data, "history": history}):
+    for chunk in gpt_chain.stream({"input": input_data}):
         yield chunk.content
 
 
