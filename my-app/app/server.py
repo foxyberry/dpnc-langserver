@@ -39,7 +39,7 @@ add_routes(
 )
 
 async def generate_stream(input_data: dict):
-    for chunk in gpt_chain.stream({"input": input_data}):
+    for chunk in gpt_chain.stream({"input_data": input_data}):
         yield chunk.content
 
 
