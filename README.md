@@ -1,4 +1,7 @@
-# dpnc-langserver
+# dpnc-langserve
+![langchain1](https://github.com/user-attachments/assets/d9eafda2-9dbf-46c5-b7d4-9a8f894338d4)
+
+
 ### 🤔 What is this repository?
 This repository contains the langserver for the DCPNC service. 
 It serves as a project skeleton and is not intended for production use. 
