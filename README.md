@@ -1,6 +1,13 @@
 # dpnc-langserve
 ![langchain1](https://github.com/user-attachments/assets/d9eafda2-9dbf-46c5-b7d4-9a8f894338d4)
+![22222](https://github.com/user-attachments/assets/497c5d9e-6356-4824-b515-db49b3852155)
 
+#### Flow
+1. The user sends an authorization request to Keycloak.
+2. Keycloak checks the user's credentials in Postgres and, if valid, returns a JWT token to the user.
+3. The user, with the JWT token, requests an explanation of the graph data from Langserver.
+4. Langserver validates the JWT token by querying Keycloak.
+5. Once Keycloak confirms the token's validity, Langserver processes the graph data using Langchain and Langsmith and returns the explanation to the user.
 
 ### 🤔 What is this repository?
 This repository contains the langserver for the DCPNC service. 
