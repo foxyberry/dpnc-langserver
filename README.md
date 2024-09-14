@@ -19,14 +19,20 @@ It utilizes an LLM (Large Language Model) to translate bar graph results into na
  - You need to have a `cert.pem` and a `key.pem` for https server in the `prod` environment. 
 
 #### 🚀 How to run?
+If the environment value is set to "prod", the server runs over HTTPS. The SSL certificate and key files are loaded, and uvicorn.run() is called with the ssl_keyfile and ssl_certfile parameters, ensuring secure communication. For other environments like "test" or "local", the server runs over HTTP.
 
+***Local*** Environment : Keycloak + Langserve
 ```bash
 cd my-app
 poetry run langchain serve --port=8123
 ```
+***Prod*** Environment : Keycloak + Langserve + Https
+```bash
+cd my-app
+poetry run uvicorn langchain_serve.app:app --port 8123 --ssl-keyfile=./certs/key.pem --ssl-certfile=./certs/cert.pem
+```
 
 #### 🔎 End Point
-If the environment value is set to "prod", the server runs over HTTPS. The SSL certificate and key files are loaded, and uvicorn.run() is called with the ssl_keyfile and ssl_certfile parameters, ensuring secure communication. For other environments like "test" or "local", the server runs over HTTP.
 
 URL : http://localhost:8123/analyze/stream_log
 ```json
