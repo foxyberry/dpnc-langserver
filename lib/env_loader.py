@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv, dotenv_values
 
-
 def load_environment_variables(env_path: str = '.env', additional_vars: dict = None):
     """
     Load environment variables from the specified .env file and optionally set additional variables.
